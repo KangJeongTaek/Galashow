@@ -50,6 +50,7 @@ public class MemberController {
         return new ResponseEntity<>("UNAUTHORIZED",HttpStatus.UNAUTHORIZED);
     }
     
+    // TODO: 20240803 마무리 영상 URL 및 위치 : https://www.youtube.com/watch?v=ewOSi1NcRLE&list=PL4C2AmBC9jOZSDU5D2kNWNaMv6IW3U4ll&index=9 14 분 24초
     @PostMapping("/signUp")
     public ResponseEntity<?> signUp(@RequestBody MemberDto memberDto) {
         Member member = Member.builder()
