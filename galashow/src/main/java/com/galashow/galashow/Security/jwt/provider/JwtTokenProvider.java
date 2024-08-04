@@ -10,14 +10,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.galashow.galashow.Constants.SecurityConstants;
 import com.galashow.galashow.Dto.CustomUser;
 import com.galashow.galashow.Entity.Authority;
 import com.galashow.galashow.Entity.Member;
 import com.galashow.galashow.Prop.JwtProps;
 import com.galashow.galashow.Repository.MemberRepository;
 import com.galashow.galashow.Security.jwt.constants.JwtConstants;
-import com.galashow.galashow.Service.MemberService;
+
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

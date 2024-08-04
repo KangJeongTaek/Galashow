@@ -58,6 +58,7 @@ public class MemberService {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
     }
     
+    // 회원 수정
     public Member update(Member member) throws Exception{
         String password = member.getPassword();
         String encodePw = passwordEncoder.encode(password);

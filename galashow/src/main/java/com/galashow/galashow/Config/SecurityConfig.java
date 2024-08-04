@@ -29,7 +29,8 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
+//@preAuthorize, @postAuthorize, @Secured 활성화
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true) 
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -59,8 +60,8 @@ public class SecurityConfig {
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                         .requestMatchers("/board/**").permitAll()
                                         .requestMatchers("/login").permitAll()
-                                        .requestMatchers("/member/signUp").permitAll()
-                                        .requestMatchers("/user/**").hasAnyRole("USER","ADMIN")
+                                        .requestMatchers("/member").permitAll()
+                                        .requestMatchers("/member/**").hasAnyRole("USER","ADMIN")
                                         .requestMatchers("/admin/**").hasRole("ADMIN")
                                         .anyRequest().authenticated())
                                         ;    
@@ -78,10 +79,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000"));
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:3000")); // 정확한 출처 설정
         config.setAllowCredentials(true);
-        config.setAllowedMethods(Arrays.asList("HEAD","GET","POST","PATCH","DELETE","OPTIONS","PUT"));
-        config.setAllowedHeaders(Collections.singletonList("*"));
+        config.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PATCH", "DELETE", "OPTIONS", "PUT"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // 구체적인 헤더 설정
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

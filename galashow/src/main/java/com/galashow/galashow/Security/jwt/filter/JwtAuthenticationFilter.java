@@ -60,7 +60,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             Authentication authResult) throws IOException, ServletException {
         log.info("인증 성공...");
         CustomUser user = (CustomUser)authResult.getPrincipal();
-
         Long mid = user.getMember().getMid();
         String memberId = user.getMember().getMemberId();
         String role = user.getMember().getAuthority().toString();

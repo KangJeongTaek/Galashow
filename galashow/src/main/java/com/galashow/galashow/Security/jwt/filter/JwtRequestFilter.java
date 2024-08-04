@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.galashow.galashow.Security.jwt.constants.JwtConstants;
