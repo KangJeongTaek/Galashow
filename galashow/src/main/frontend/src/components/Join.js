@@ -1,63 +1,50 @@
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
 import axios from 'axios';
+import * as auth from '../apis/auth';
+import { join } from '../services/join';
+import { useNavigate } from 'react-router-dom';
 const containsWhiespace = (str) => /\s/.test(str); 
 
 const SignUp = () => {
 
-    const [member,setMember] = useState({
-        memberid : '',
-        memberpassword : '',
-        nickName : ''
-    })
-    const idChange = (e) =>{
-        const {value} = e.target;
-        setMember(prevmember =>({
-            ...prevmember,
-            memberid : value
-        }))
-    }
+    const navigate = useNavigate();
 
-    const passwordChange = (e) =>{
-        const {value} = e.target;
-        setMember(prevmember =>({
-            ...prevmember,
-            memberpassword : value
-        }))
-    }
-    const nickNameChange = (e) =>{
-        const {value} = e.target;
-        setMember(prevmember => ({
-            ...prevmember,
-            nickName : value
-        }))
-    }
+    const onJoin = async (e) =>{
+        e.preventDefault();
+        console.log(e.target);
+        const form = e.target;
+        const memberId = form.memberId.value;
+        const password = form.password.value;
+        const nickName = form.nickName.value;
 
-    const signUp = () => {
-        if(member.memberid === ''){
-            alert("아이디를 입력해주세요.");
-            return
+        if(memberId === null || memberId === ''){
+            alert('아이디를 입력해주세요.');
+            return;
         }
-        if(member.memberpassword === ''){
-            alert('비밀번호를 입력해주세요');
-            return
-        }
-        if(containsWhiespace(member.memberid) || containsWhiespace(member.memberpassword)){
-            alert("아이디와 비밀번호는 공백을 포함할 수 없습니다.");
-            return
-        }
+        if(password === null || password === ''){
 
-        axios.post("http://localhost:8080/member/join",member)
-        .then((response) => console.log(response.status))
-        .catch((response) => console.log(response))
-
-    } 
+         alert('비밀번호를 입력해주세요.');
+          return;
+        }
+        if(nickName === null || nickName === ''){
+         alert('닉네임을 입력해주세요,');
+         return;
+        }
+        
+        //회원가입 APi 보내기
+        const status = await join({memberId,password,nickName});
+        console.log(status);
+        if(status === 201){
+            navigate("/login");
+        }
+    }
 
     return (
         <div>
             <Container>
             <div className='m-3'>
-            <form>
+            <form onSubmit={onJoin}>
                 <label htmlFor='id' className='form-label'>아이디</label>
                 <input type='text' className='form-control' id='id' aria-describedby='idhelp' name='memberId' placeholder='아이디' autoComplete='memberId' required/>
                 <div id='idhelp' className='form-text mb-4'>아이디를 입력해주세요</div>

@@ -97,6 +97,7 @@ const LoginContextProvider = ({children}) => {
                     // 로그인 체크 (/member/info <---- memberData)
                     loginCheck();
                     alert("로그인 성공!!");
+                    navigate("/");
                 }
             }).catch(error => {
                 alert("해당하는 회원 정보가 없습니다. 다시 한 번 확인해주세요.");

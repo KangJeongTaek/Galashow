@@ -2,6 +2,7 @@ package com.galashow.galashow.Service;
 
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,11 +33,7 @@ public class MemberService {
 
 
     public Member saveMember(Member member){
-        if(memberRepository.existsByMemberId(member.getNickName())){
-            throw new Error("이미 존재하는 유저입니다.");
-        }
         return memberRepository.save(member);
-        
     }
 
     public void login(Member member,HttpServletRequest request) throws Exception{
