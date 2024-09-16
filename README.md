@@ -8,3 +8,6 @@
 
 ### 사용 기술
 - PostgreSQL, Spring Boot, React
+
+### 2024년 9월 16일 
+- 백엔드 언어를 Kotlin을 바꾸어 만들어보기로 결정
